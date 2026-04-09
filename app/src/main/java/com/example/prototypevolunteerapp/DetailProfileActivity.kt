@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.layout.ContentScale
 
 class DetailProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +59,7 @@ fun DetailProfileScreen(
         Image(
             painter = painterResource(id = image),
             contentDescription = null,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(120.dp)
                 .clip(CircleShape) //  profil bulat

@@ -71,7 +71,7 @@ fun ProfileScreen() {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .verticalScroll(rememberScrollState()) // ✅ SCROLL AKTIF
+                        .verticalScroll(rememberScrollState())
                         .padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -98,7 +98,6 @@ fun ProfileScreen() {
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // Explicit intent untuk ke View Profile
                     Button(
                         onClick = {
                             val intent = Intent(context, DetailProfileActivity::class.java).apply {
@@ -181,12 +180,6 @@ fun getDummyVolunteers() = listOf(
 📍 Tempat, Tanggal Lahir:
 Yogyakarta, 12 Mei 2005
 
-📱 No HP:
-085183163106
-
-📧 Email:
-saskyaaliyaazizah06@email.com
-
 🎓 Pendidikan:
 Mahasiswa S-1 Informatika, Universitas Sebelas Maret angkatan 2024
 
@@ -225,12 +218,6 @@ Saya adalah seorang relawan yang memiliki semangat tinggi dalam berkontribusi un
 📍 Tempat, Tanggal Lahir:
 Klaten, 20 Agustus 2006
 
-📱 No HP:
-085743192088
-
-📧 Email:
-mumtatazah@gmail.com
-
 🎓 Pendidikan:
 Mahasiswa S-1 Informatika, Universitas Sebelas Maret angkatan 2024
 
@@ -267,12 +254,6 @@ Saya adalah pribadi yang memiliki empati tinggi dan dedikasi untuk membantu sesa
 📍 Tempat, Tanggal Lahir:
 Boyolali, 09 Maret 2007
 
-📱 No HP:
-085800379000
-
-📧 Email:
-sannytazkiyah@gmail.com
-
 🎓 Pendidikan:
 Mahasiswa S-1 Informatika, Universitas Sebelas Maret angkatan 2024
 
@@ -308,12 +289,6 @@ Saya adalah mahasiswa Informatika yang percaya bahwa teknologi terbaik lahir dar
            
 📍 Tempat, Tanggal Lahir:
 Ngawi, 04 Oktober 2006
-
-📱 No HP:
-082139452707
-
-📧 Email:
-queennikamutiara@gmail.com
 
 🎓 Pendidikan:
 Mahasiswa S-1 Informatika, Universitas Sebelas Maret angkatan 2024.
