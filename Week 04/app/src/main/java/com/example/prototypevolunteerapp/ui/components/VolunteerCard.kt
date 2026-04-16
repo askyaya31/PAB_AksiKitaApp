@@ -22,9 +22,12 @@ fun VolunteerCard(volunteer: Volunteer) {
     val context = LocalContext.current
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().height(150.dp),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
     ) {
         Row(
             modifier = Modifier
@@ -37,18 +40,20 @@ fun VolunteerCard(volunteer: Volunteer) {
                 contentDescription = volunteer.name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(80.dp)
+                    .height(120.dp)
+                    .width(96.dp)
                     .clip(RoundedCornerShape(12.dp))
+                    .align(Alignment.CenterVertically)
             )
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text(text = volunteer.name, style = MaterialTheme.typography.titleMedium)
                 Text(
                     text = volunteer.education,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.secondary
+                    color = MaterialTheme.colorScheme.tertiary
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
@@ -57,24 +62,28 @@ fun VolunteerCard(volunteer: Volunteer) {
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                Button(
+                    onClick = {
+                        val intent = Intent(context, VolunteerDetailActivity::class.java).apply {
+                            putExtra("name", volunteer.name)
+                            putExtra("desc", volunteer.description)
+                            putExtra("image", volunteer.imageRes)
+                            putExtra("phone", volunteer.phone)
+                            putExtra("email", volunteer.email)
+                        }
+                        context.startActivity(intent)
+                    },
+                    modifier = Modifier.align(Alignment.End)
+                                        .height(35.dp)
+                    ,
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp)
+                ) {
+                    Text("View Profile")
+                }
             }
 
             Spacer(modifier = Modifier.width(8.dp))
-
-            Button(
-                onClick = {
-                    val intent = Intent(context, VolunteerDetailActivity::class.java).apply {
-                        putExtra("name", volunteer.name)
-                        putExtra("desc", volunteer.description)
-                        putExtra("image", volunteer.imageRes)
-                        putExtra("phone", volunteer.phone)
-                        putExtra("email", volunteer.email)
-                    }
-                    context.startActivity(intent)
-                }
-            ) {
-                Text("View Profile")
-            }
         }
     }
 }

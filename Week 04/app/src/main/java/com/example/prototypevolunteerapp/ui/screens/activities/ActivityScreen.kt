@@ -27,12 +27,9 @@ fun ActivityScreen() {
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Discover Activities") })
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { /* TODO: Buat kegiatan baru */ }) {
-                Icon(Icons.Default.Add, contentDescription = "Buat Kegiatan Baru")
-            }
+            TopAppBar(title = { Text("Meet the Volunteers") },
+                colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.primary)
+            )
         }
     ) { innerPadding ->
         if (isLoading) {
