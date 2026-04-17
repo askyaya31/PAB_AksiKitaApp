@@ -11,6 +11,7 @@ private val LightColorScheme = lightColorScheme(
     primary = PrimaryColor,
     secondary = SecondaryColor,
     background = BackgroundColor,
+    tertiary = DarkGreen,
     surface = SurfaceColor,
     onPrimary = OnPrimaryColor,
     onSurface = OnSurfaceColor
