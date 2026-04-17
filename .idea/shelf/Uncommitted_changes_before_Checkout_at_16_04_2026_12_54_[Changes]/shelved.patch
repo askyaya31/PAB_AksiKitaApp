@@ -1,0 +1,30 @@
+Index: app/src/main/java/com/example/prototypevolunteerapp/ProfileActivity.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/prototypevolunteerapp/ProfileActivity.kt b/app/src/main/java/com/example/prototypevolunteerapp/profile/ProfileActivity.kt
+rename from app/src/main/java/com/example/prototypevolunteerapp/ProfileActivity.kt
+rename to app/src/main/java/com/example/prototypevolunteerapp/profile/ProfileActivity.kt
+--- a/app/src/main/java/com/example/prototypevolunteerapp/ProfileActivity.kt	(revision 1f78796960d48daaf8fd583f54091ca01a3ef5a1)
++++ b/app/src/main/java/com/example/prototypevolunteerapp/profile/ProfileActivity.kt	(date 1776296633958)
+@@ -1,4 +1,4 @@
+-package com.example.prototypevolunteerapp
++package com.example.prototypevolunteerapp.profile
+ 
+ import android.content.Intent
+ import android.os.Bundle
+@@ -26,6 +26,7 @@
+ import androidx.compose.ui.text.style.TextAlign
+ import androidx.compose.ui.unit.dp
+ import androidx.compose.ui.Alignment
++import com.example.prototypevolunteerapp.R
+ 
+ class ProfileActivity : ComponentActivity() {
+     override fun onCreate(savedInstanceState: Bundle?) {
+@@ -71,7 +72,7 @@
+                 Column(
+                     modifier = Modifier
+                         .fillMaxSize()
+-                        .verticalScroll(rememberScrollState()) // ✅ SCROLL AKTIF
++                        .verticalScroll(rememberScrollState()) // scroll aktif
+                         .padding(24.dp),
+                     horizontalAlignment = Alignment.CenterHorizontally
+                 ) {

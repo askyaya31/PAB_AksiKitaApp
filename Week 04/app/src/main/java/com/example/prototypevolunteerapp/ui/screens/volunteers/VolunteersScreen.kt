@@ -25,7 +25,9 @@ fun VolunteersScreen() {
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Meet the Volunteers") })
+            TopAppBar(title = { Text("Meet the Volunteers") },
+                colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.primary)
+            )
         }
     ) { innerPadding ->
         if (isLoading) {

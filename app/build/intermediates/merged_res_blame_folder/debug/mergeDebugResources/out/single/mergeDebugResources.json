@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_social_activity2.png.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/social_activity2.png"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_volunteer4.jpeg.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/volunteer4.jpeg"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_volunteer3.jpeg.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/volunteer3.jpeg"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_social_activity1.png.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/social_activity1.png"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_social_activity3.jpeg.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/social_activity3.jpeg"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_volunteer1.png.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/volunteer1.png"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-anydpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_volunteer2.jpeg.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/volunteer2.jpeg"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/xml_backup_rules.xml.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/drawable_logo.png.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/drawable/logo.png"
+    },
+    {
+        "merged": "com.example.prototypevolunteerapp-debug-45:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.prototypevolunteerapp-main-47:/mipmap-hdpi/ic_launcher.webp"
+    }
+]
