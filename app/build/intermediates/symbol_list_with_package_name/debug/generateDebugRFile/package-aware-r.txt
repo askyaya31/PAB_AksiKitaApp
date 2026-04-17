@@ -1,0 +1,24 @@
+com.example.prototypevolunteerapp
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable logo
+drawable social_activity1
+drawable social_activity2
+drawable social_activity3
+drawable volunteer1
+drawable volunteer2
+drawable volunteer3
+drawable volunteer4
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme_PrototypeVolunteerApp
+xml backup_rules
+xml data_extraction_rules

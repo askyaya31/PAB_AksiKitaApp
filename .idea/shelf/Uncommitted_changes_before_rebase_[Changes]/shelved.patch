@@ -1,0 +1,115 @@
+Index: app/src/main/java/com/example/prototypevolunteerapp/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.prototypevolunteerapp\r\n\r\nimport android.content.Intent\r\nimport androidx.compose.runtime.Composable\r\nimport android.os.Bundle\r\nimport androidx.activity.ComponentActivity\r\nimport androidx.activity.compose.setContent\r\nimport androidx.compose.foundation.layout.*\r\nimport androidx.compose.foundation.shape.RoundedCornerShape\r\nimport androidx.compose.material3.*\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.foundation.Image\r\nimport androidx.compose.ui.res.painterResource\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.text.font.FontWeight\r\nimport androidx.compose.ui.text.style.TextAlign\r\nimport androidx.compose.ui.unit.dp\r\n\r\n//main activity dari AksiKita\r\nclass MainActivity : ComponentActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContent {\r\n            MaterialTheme {\r\n                DashboardScreen(\r\n                    onDisplayClick = {\r\n                        startActivity(Intent(this, DisplayActivity::class.java))\r\n                    },\r\n                    onProfileClick = {\r\n                        startActivity(Intent(this, ProfileActivity::class.java))\r\n                    }\r\n                )\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n@Composable\r\nfun DashboardScreen(\r\n    onDisplayClick: () -> Unit,\r\n    onProfileClick: () -> Unit\r\n) {\r\n    Column(\r\n        modifier = Modifier\r\n            .fillMaxSize()\r\n            .padding(horizontal = 24.dp, vertical = 32.dp),\r\n        verticalArrangement = Arrangement.SpaceBetween\r\n    ) {\r\n        Column(\r\n            horizontalAlignment = Alignment.CenterHorizontally,\r\n            modifier = Modifier.fillMaxWidth()\r\n        ) {\r\n            Text(\r\n                text = \"AksiKita\",\r\n                style = MaterialTheme.typography.headlineLarge,\r\n                fontWeight = FontWeight.Bold\r\n            )\r\n            Spacer(modifier = Modifier.height(8.dp))\r\n            Text(\r\n                text = \"Connecting People, Creating Impact\",\r\n                style = MaterialTheme.typography.bodyMedium,\r\n                textAlign = TextAlign.Center\r\n            )\r\n            Spacer(modifier = Modifier.height(20.dp))\r\n\r\n            Image(\r\n                painter = painterResource(id = R.drawable.logo),\r\n                contentDescription = \"Logo\",\r\n                modifier = Modifier\r\n                    .fillMaxWidth()\r\n                    .height(260.dp)\r\n                    .align(Alignment.CenterHorizontally)\r\n            )\r\n        }\r\n\r\n        Spacer(modifier = Modifier.height(20.dp))\r\n        Column(\r\n            modifier = Modifier.fillMaxWidth(),\r\n            verticalArrangement = Arrangement.spacedBy(16.dp)\r\n        ) {\r\n            // Explicit intent untuk ke activity Find You Impact\r\n            Button(\r\n                onClick = onDisplayClick,\r\n                modifier = Modifier.fillMaxWidth()\r\n                    .height(56.dp),\r\n                shape = RoundedCornerShape(16.dp)\r\n            ) {\r\n                Text(\r\n                    text = \"Find Your Impact!\",\r\n                    style = MaterialTheme.typography.titleMedium\r\n                )\r\n            }\r\n\r\n            // Explicit intent untuk ke activity Meet the Volunteers\r\n            OutlinedButton(\r\n                onClick = onProfileClick,\r\n                modifier = Modifier\r\n                    .fillMaxWidth()\r\n                    .height(56.dp),\r\n                shape = RoundedCornerShape(16.dp)\r\n            ) {\r\n                Text(\r\n                    text = \"Meet the Volunteers\",\r\n                    style = MaterialTheme.typography.titleMedium\r\n                )\r\n            }\r\n        }\r\n        //footer\r\n        Text(\r\n            text = \"AksiKita © 2026\",\r\n            style = MaterialTheme.typography.bodySmall,\r\n            modifier = Modifier.fillMaxWidth(),\r\n            textAlign = TextAlign.Center\r\n        )\r\n    }\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/prototypevolunteerapp/MainActivity.kt b/app/src/main/java/com/example/prototypevolunteerapp/MainActivity.kt
+--- a/app/src/main/java/com/example/prototypevolunteerapp/MainActivity.kt	(revision e141eb3d6555a895f1f52f66c9e883e36d0383c5)
++++ b/app/src/main/java/com/example/prototypevolunteerapp/MainActivity.kt	(date 1776318854680)
+@@ -15,6 +15,8 @@
+ import androidx.compose.ui.text.font.FontWeight
+ import androidx.compose.ui.text.style.TextAlign
+ import androidx.compose.ui.unit.dp
++import com.example.prototypevolunteerapp.activity.DisplayActivity
++import com.example.prototypevolunteerapp.profile.ProfileActivity
+ 
+ //main activity dari AksiKita
+ class MainActivity : ComponentActivity() {
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.PrototypeVolunteerApp\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\"\r\n            android:label=\"@string/app_name\"\r\n            android:theme=\"@style/Theme.PrototypeVolunteerApp\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity android:name=\".DisplayActivity\" />\r\n        <activity android:name=\".ProfileActivity\" />\r\n        <activity android:name=\".DetailActivity\" />\r\n        <activity android:name=\".DetailProfileActivity\" />\r\n    </application>\r\n\r\n</manifest>
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision e141eb3d6555a895f1f52f66c9e883e36d0383c5)
++++ b/app/src/main/AndroidManifest.xml	(date 1776318867908)
+@@ -22,10 +22,10 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-        <activity android:name=".DisplayActivity" />
+-        <activity android:name=".ProfileActivity" />
+-        <activity android:name=".DetailActivity" />
+-        <activity android:name=".DetailProfileActivity" />
++        <activity android:name=".activity.DisplayActivity" />
++        <activity android:name=".profile.ProfileActivity" />
++        <activity android:name=".activity.DetailActivity" />
++        <activity android:name=".profile.DetailProfileActivity" />
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: app/src/main/java/com/example/prototypevolunteerapp/DetailActivity.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/prototypevolunteerapp/DetailActivity.kt b/app/src/main/java/com/example/prototypevolunteerapp/activity/DetailActivity.kt
+rename from app/src/main/java/com/example/prototypevolunteerapp/DetailActivity.kt
+rename to app/src/main/java/com/example/prototypevolunteerapp/activity/DetailActivity.kt
+--- a/app/src/main/java/com/example/prototypevolunteerapp/DetailActivity.kt	(revision e141eb3d6555a895f1f52f66c9e883e36d0383c5)
++++ b/app/src/main/java/com/example/prototypevolunteerapp/activity/DetailActivity.kt	(date 1776318854861)
+@@ -1,8 +1,8 @@
+-package com.example.prototypevolunteerapp
++package com.example.prototypevolunteerapp.activity
+ 
++import android.R
+ import android.content.Intent
+ import android.os.Bundle
+-import android.net.Uri
+ import androidx.activity.ComponentActivity
+ import androidx.activity.compose.setContent
+ import androidx.compose.foundation.Image
+@@ -25,7 +25,7 @@
+         val title = intent.getStringExtra("title")
+         val location = intent.getStringExtra("location")
+         val desc = intent.getStringExtra("desc")
+-        val image = intent.getIntExtra("image", android.R.drawable.ic_menu_gallery)
++        val image = intent.getIntExtra("image", R.drawable.ic_menu_gallery)
+         val instagram = intent.getStringExtra("instagram")
+         val link = intent.getStringExtra("link")
+ 
+Index: app/src/main/java/com/example/prototypevolunteerapp/DetailProfileActivity.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/prototypevolunteerapp/DetailProfileActivity.kt b/app/src/main/java/com/example/prototypevolunteerapp/profile/DetailProfileActivity.kt
+rename from app/src/main/java/com/example/prototypevolunteerapp/DetailProfileActivity.kt
+rename to app/src/main/java/com/example/prototypevolunteerapp/profile/DetailProfileActivity.kt
+--- a/app/src/main/java/com/example/prototypevolunteerapp/DetailProfileActivity.kt	(revision e141eb3d6555a895f1f52f66c9e883e36d0383c5)
++++ b/app/src/main/java/com/example/prototypevolunteerapp/profile/DetailProfileActivity.kt	(date 1776318854797)
+@@ -1,7 +1,7 @@
+-package com.example.prototypevolunteerapp
++package com.example.prototypevolunteerapp.profile
+ 
++import android.R
+ import android.content.Intent
+-import android.net.Uri
+ import android.os.Bundle
+ import androidx.activity.ComponentActivity
+ import androidx.activity.compose.setContent
+@@ -28,7 +28,7 @@
+ 
+         val name = intent.getStringExtra("name")
+         val desc = intent.getStringExtra("desc")
+-        val image = intent.getIntExtra("image", android.R.drawable.ic_menu_gallery)
++        val image = intent.getIntExtra("image", R.drawable.ic_menu_gallery)
+         val phone = intent.getStringExtra("phone")
+         val email = intent.getStringExtra("email")
+ 
+Index: app/src/main/java/com/example/prototypevolunteerapp/DisplayActivity.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/prototypevolunteerapp/DisplayActivity.kt b/app/src/main/java/com/example/prototypevolunteerapp/activity/DisplayActivity.kt
+rename from app/src/main/java/com/example/prototypevolunteerapp/DisplayActivity.kt
+rename to app/src/main/java/com/example/prototypevolunteerapp/activity/DisplayActivity.kt
+--- a/app/src/main/java/com/example/prototypevolunteerapp/DisplayActivity.kt	(revision e141eb3d6555a895f1f52f66c9e883e36d0383c5)
++++ b/app/src/main/java/com/example/prototypevolunteerapp/activity/DisplayActivity.kt	(date 1776318854709)
+@@ -1,4 +1,4 @@
+-package com.example.prototypevolunteerapp
++package com.example.prototypevolunteerapp.activity
+ 
+ import android.content.Intent
+ import android.os.Bundle
+@@ -14,6 +14,7 @@
+ import androidx.compose.ui.res.painterResource
+ import androidx.compose.ui.text.style.TextAlign
+ import androidx.compose.ui.unit.dp
++import com.example.prototypevolunteerapp.R
+ 
+ class DisplayActivity : ComponentActivity() {
+     override fun onCreate(savedInstanceState: Bundle?) {
