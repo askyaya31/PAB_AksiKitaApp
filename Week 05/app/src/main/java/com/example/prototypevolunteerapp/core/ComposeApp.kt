@@ -32,7 +32,7 @@ fun ComposeApp() {
                 ),
                 entryProvider = entryProvider {
                     entry<Routes.WelcomeRoute> {WelcomeScreen()}
-                    entry<Routes.HomeRoute> {HomeScreen()}
+                    entry<Routes.HomeRoute> {HomeScreen(userName = it.userName)}
                     entry<Routes.ActivitiesRoute> {
                         ActivitiesScreen()
                     }

@@ -9,7 +9,7 @@ object Routes {
     data object WelcomeRoute : NavKey
 
     @Serializable
-    data object HomeRoute : NavKey
+    data class HomeRoute(val userName : String) : NavKey
 
     //Halaman tanpa parameter
     @Serializable

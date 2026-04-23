@@ -23,10 +23,11 @@ import com.example.prototypevolunteerapp.core.LocalBackStack
 import com.example.prototypevolunteerapp.core.Routes
 import com.example.prototypevolunteerapp.data.model.getDummyActivities
 import com.example.prototypevolunteerapp.ui.components.AppFooter
+import androidx.core.net.toUri
 
 // Semua navigasi menggunakan backStack.add(Route) dari LocalBackStack
 @Composable
-fun HomeScreen() {
+fun HomeScreen(userName : String) {
     val backStack = LocalBackStack.current
     Column(
         modifier = Modifier
@@ -34,7 +35,7 @@ fun HomeScreen() {
             .background(Color(0xFFF5F5F5))
             .verticalScroll(rememberScrollState())
     ) {
-        HeaderSection()
+        HeaderSection(userName = userName)
         Column(modifier = Modifier.padding(16.dp)) {
             NearbyActivityCard()
             Spacer(modifier = Modifier.height(24.dp))
@@ -56,7 +57,7 @@ fun HomeScreen() {
 }
 
 @Composable
-fun HeaderSection() {
+fun HeaderSection(userName : String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -71,7 +72,7 @@ fun HeaderSection() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Hello, Volunteer!",
+                    text = "Hello, $userName!",
                     color = Color.White,
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold
@@ -136,7 +137,7 @@ fun NearbyActivityCard() {
                 Button(onClick = {
                     val intent = Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("https://linktr.ee/AbdinationIndonesiaMengabdi3")
+                        "https://linktr.ee/AbdinationIndonesiaMengabdi3".toUri()
                     )
                     context.startActivity(intent)
                 }) {
