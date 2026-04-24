@@ -7,16 +7,14 @@ import kotlinx.serialization.Serializable
 object Routes {
     @Serializable
     data object WelcomeRoute : NavKey
-
     @Serializable
-    data class HomeRoute(val userName : String) : NavKey
+    data object HomeRoute : NavKey
+    @Serializable
+    data object LoginRoute : NavKey
 
-    //Halaman tanpa parameter
     @Serializable
     data object ActivitiesRoute : NavKey
 
-    // Halaman dengan parameter
-    //Passing parameter: membawa data lengkap activity ke halaman detail
     @Serializable
     data class ActivityDetailRoute(
         val title: String,
@@ -32,11 +30,7 @@ object Routes {
 
     @Serializable
     data class VolunteerDetailRoute(
-        val name: String,
-        val desc: String,
-        val imageRes: Int,
-        val phone: String = "",
-        val email: String = ""
+        val volunteerIndex: Int  // index dari getDummyVolunteers()
     ) : NavKey
 
     @Serializable
