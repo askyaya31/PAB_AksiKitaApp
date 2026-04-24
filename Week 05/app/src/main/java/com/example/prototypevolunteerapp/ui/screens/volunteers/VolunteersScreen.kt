@@ -8,7 +8,10 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.prototypevolunteerapp.core.LocalBackStack
 import com.example.prototypevolunteerapp.core.Routes
 import com.example.prototypevolunteerapp.data.model.getDummyVolunteers
@@ -17,37 +20,44 @@ import com.example.prototypevolunteerapp.ui.components.LoadingIndicator
 import com.example.prototypevolunteerapp.ui.components.VolunteerCard
 import kotlinx.coroutines.delay
 
-// Back Navigation buat tombol panah kiri di TopAppBar
-// Passing Parameter tiap VolunteerCard mengirim data ke VolunteerDetailRoute
+private val ScreenBg = Color(0xFFEAEDE7)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VolunteersScreen() {
-    val backStack = LocalBackStack.current
+    val backStack  = LocalBackStack.current
+    val volunteers = remember { getDummyVolunteers() }
 
     var isLoading by remember { mutableStateOf(true) }
     LaunchedEffect(Unit) {
-        delay(1000)
+        delay(800)
         isLoading = false
     }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Meet The Volunteers") },
+                title = {
+                    Text(
+                        text = "Meet the Volunteers!",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp,
+                        color = Color(0xFF1A1A1A)
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { backStack.removeLastOrNull() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Kembali"
+                            contentDescription = "Back",
+                            tint = Color(0xFF1A1A1A)
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
-                )
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = ScreenBg)
             )
-        }
+        },
+        containerColor = ScreenBg
     ) { innerPadding ->
         if (isLoading) {
             LoadingIndicator(modifier = Modifier.padding(innerPadding))
@@ -56,22 +66,16 @@ fun VolunteersScreen() {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                items(getDummyVolunteers()) { volunteer ->
+                item { Spacer(modifier = Modifier.height(4.dp)) }
+                items(volunteers.indices.toList()) { index ->
                     VolunteerCard(
-                        volunteer = volunteer,
+                        volunteer = volunteers[index],
                         onViewProfile = {
-                            // PAassing parameter ke VolunteerDetailRoute
                             backStack.add(
-                                Routes.VolunteerDetailRoute(
-                                    name     = volunteer.name,
-                                    desc     = volunteer.description,
-                                    imageRes = volunteer.imageRes,
-                                    phone    = volunteer.phone ?: "",
-                                    email    = volunteer.email ?: ""
-                                )
+                                Routes.VolunteerDetailRoute(volunteerIndex = index)
                             )
                         }
                     )
