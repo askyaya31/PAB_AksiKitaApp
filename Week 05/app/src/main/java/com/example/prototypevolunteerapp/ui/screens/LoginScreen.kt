@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -15,15 +14,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,9 +42,7 @@ fun LoginScreen(
     onLoginClick: (email: String, password: String) -> Unit = { _, _ -> },
     onForgotPasswordClick: () -> Unit = {},
     onRegisterClick: () -> Unit = {},
-    onInstagramClick: () -> Unit = {},
-    onGmailClick: () -> Unit = {},
-    onFacebookClick: () -> Unit = {}
+    onGoogleLoginClick: () -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -197,25 +196,42 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(24.dp),
-                verticalAlignment = Alignment.CenterVertically
+            Surface(
+                onClick = onGoogleLoginClick,
+                shape = RoundedCornerShape(50.dp),
+                color = White,
+                shadowElevation = 2.dp,
+                modifier = Modifier.fillMaxWidth().height(56.dp)
             ) {
-                LoginButton(
-                    R.drawable.instagram,
-                    contentDesc = "Instagram",
-                    onClick = onInstagramClick
-                )
-                LoginButton(
-                    R.drawable.gmail_icon,
-                    contentDesc = "Gmail",
-                    onClick = onGmailClick
-                )
-                LoginButton(
-                     R.drawable.facebook_icon,
-                    contentDesc = "Facebook",
-                    onClick = onFacebookClick
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.Google),
+                        contentDescription = "Google Icon",
+                        tint = Color.Unspecified,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    color = Color(0xFF3C3C3C),
+                                    fontWeight = FontWeight.Medium
+                                )
+                            ) {
+                                append("Continue with ")
+                            }
+                            withStyle(SpanStyle(color = Color(0xFF4285F4), fontWeight = FontWeight.SemiBold)) {
+                                append("Google")
+                            }
+                        },
+                        fontSize = 15.sp
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -242,29 +258,6 @@ fun LoginScreen(
     }
 }
 
-
-@Composable
-fun LoginButton(
-    iconResId: Int,
-    contentDesc: String,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .size(64.dp)
-            .clip(CircleShape)
-            .background(White)
-            .clickable { onClick() },
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            painter = painterResource(id = iconResId),
-            contentDescription = contentDesc,
-            modifier = Modifier.size(38.dp),
-            tint = Color.Unspecified
-        )
-    }
-}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
