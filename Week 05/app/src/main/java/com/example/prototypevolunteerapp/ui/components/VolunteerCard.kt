@@ -1,9 +1,12 @@
 package com.example.prototypevolunteerapp.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,25 +15,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.prototypevolunteerapp.data.model.Volunteer
 
-// VolunteerCard menerima lambda onViewDetail di-pass dari VolunteersScreen
+private val CardBg = Color(0xFFCDD8C4)
+
 @Composable
 fun VolunteerCard(
     volunteer: Volunteer,
-    onViewProfile: () -> Unit  // lambda navigasinya
+    onViewProfile: () -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(26.dp),
-        border = BorderStroke(4.dp, Color(0x886B7280)),
-        colors = CardDefaults.cardColors(containerColor = Color(0x95A2D365))
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = CardBg),
+        elevation = CardDefaults.cardElevation(0.dp)
     ) {
         Row(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(horizontal = 16.dp, vertical = 12.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -39,28 +44,36 @@ fun VolunteerCard(
                 contentDescription = volunteer.name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(80.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .size(52.dp)
+                    .clip(CircleShape)
             )
-
-            Spacer(modifier = Modifier.width(16.dp))
-
+            Spacer(modifier = Modifier.width(14.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text(text = volunteer.name, style = MaterialTheme.typography.titleMedium)
-                Text(text = volunteer.education, style = MaterialTheme.typography.bodyMedium)
-                Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = volunteer.description.lines().firstOrNull() ?: "",
-                    style = MaterialTheme.typography.bodySmall,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    text = volunteer.name,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 14.sp,
+                    color = Color(0xFF1A1A1A)
+                )
+                Text(
+                    text = volunteer.education,
+                    fontSize = 12.sp,
+                    color = Color(0xFF555555)
                 )
             }
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Button(onClick = onViewProfile) {
-                Text("View Profile")
+            IconButton(
+                onClick = onViewProfile,
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFFB5C4AE))
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = "Lihat Profil",
+                    tint = Color(0xFF3A4A3D),
+                    modifier = Modifier.size(18.dp)
+                )
             }
         }
     }
