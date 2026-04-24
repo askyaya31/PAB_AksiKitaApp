@@ -45,7 +45,6 @@ fun WelcomeScreen() {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Spacer(modifier = Modifier.height(48.dp))
-
             // Logo dan Judul
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
@@ -85,7 +84,7 @@ fun WelcomeScreen() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // TextField nama dipakai untuk conditional navigation
+                //TextField nama dipakai untuk conditional navigation
                 OutlinedTextField(
                     value = namaInput,
                     onValueChange = {
@@ -117,13 +116,13 @@ fun WelcomeScreen() {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Conditional navigation
-                // Tombol hanya berpindah layar jika namaInput tidak kosong
+                //tombol hanya berpindah layar jika namaInput tidak kosong
                 Button(
                     onClick = {
                         if (namaInput.isBlank()) {
                             showError = true
                         } else {
-                            backStack.add(Routes.HomeRoute(userName = namaInput))
+                            backStack.add(Routes.LoginRoute)
                         }
                     },
                     modifier = Modifier
