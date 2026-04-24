@@ -21,13 +21,12 @@ import androidx.compose.ui.unit.dp
 import com.example.prototypevolunteerapp.R
 import com.example.prototypevolunteerapp.core.LocalBackStack
 import com.example.prototypevolunteerapp.core.Routes
+import com.example.prototypevolunteerapp.core.UserSession
 import com.example.prototypevolunteerapp.data.model.getDummyActivities
 import com.example.prototypevolunteerapp.ui.components.AppFooter
-import androidx.core.net.toUri
 
-// Semua navigasi menggunakan backStack.add(Route) dari LocalBackStack
 @Composable
-fun HomeScreen(userName : String) {
+fun HomeScreen() {
     val backStack = LocalBackStack.current
     Column(
         modifier = Modifier
@@ -35,7 +34,7 @@ fun HomeScreen(userName : String) {
             .background(Color(0xFFF5F5F5))
             .verticalScroll(rememberScrollState())
     ) {
-        HeaderSection(userName = userName)
+        HeaderSection()
         Column(modifier = Modifier.padding(16.dp)) {
             NearbyActivityCard()
             Spacer(modifier = Modifier.height(24.dp))
@@ -43,8 +42,6 @@ fun HomeScreen(userName : String) {
             RecommendationSection()
             Spacer(modifier = Modifier.height(24.dp))
             Spacer(modifier = Modifier.height(24.dp))
-
-            //FeatureGrid pake lambda navigasi buat routes
             FeatureGrid(
                 onActivitiesClick    = { backStack.add(Routes.ActivitiesRoute) },
                 onVolunteersClick    = { backStack.add(Routes.VolunteersRoute) },
@@ -57,7 +54,12 @@ fun HomeScreen(userName : String) {
 }
 
 @Composable
-fun HeaderSection(userName : String) {
+fun HeaderSection() {
+    val userName = UserSession.currentUser?.name
+        ?.split(" ")
+        ?.firstOrNull()
+        ?: "Volunteer"
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -72,6 +74,7 @@ fun HeaderSection(userName : String) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
+                    //nama asli dari UserSession
                     text = "Hello, $userName!",
                     color = Color.White,
                     style = MaterialTheme.typography.headlineMedium,
@@ -137,7 +140,7 @@ fun NearbyActivityCard() {
                 Button(onClick = {
                     val intent = Intent(
                         Intent.ACTION_VIEW,
-                        "https://linktr.ee/AbdinationIndonesiaMengabdi3".toUri()
+                        Uri.parse("https://linktr.ee/AbdinationIndonesiaMengabdi3")
                     )
                     context.startActivity(intent)
                 }) {
@@ -175,7 +178,6 @@ fun RecommendationSection() {
     }
 }
 
-// FeatureGrid menerima lambda navigasi
 @Composable
 fun FeatureGrid(
     onActivitiesClick: () -> Unit,
