@@ -25,39 +25,28 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.prototypevolunteerapp.R
+import com.example.prototypevolunteerapp.core.LocalBackStack
+import com.example.prototypevolunteerapp.core.Routes
+import com.example.prototypevolunteerapp.core.UserSession
 
-private val DarkGreen = Color(0xFF121713)
-private val MediumGreen = Color(0xFF5C7561)
-private val LightGreen = Color(0xFF92BA9A)
-private val InputBg = Color(0x33FFFFFF)
-private val White = Color.White
-private val HintColor = Color(0xAAFFFFFF)
 
 @Composable
-fun LoginScreen(
-    onLoginClick: (email: String, password: String) -> Unit = { _, _ -> },
-    onForgotPasswordClick: () -> Unit = {},
-    onRegisterClick: () -> Unit = {},
-    onGoogleLoginClick: () -> Unit = {}
-) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun LoginScreen() {
+    val backStack = LocalBackStack.current
+    var email           by remember { mutableStateOf("") }
+    var password        by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var loginError      by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(
-                        DarkGreen,
-                        MediumGreen,
-                        LightGreen
-                    )
+                    colors = listOf(DarkGreen, MediumGreen, LightGreen)
                 )
             )
     ) {
@@ -76,15 +65,11 @@ fun LoginScreen(
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold
             )
-
             Spacer(modifier = Modifier.height(40.dp))
-
             OutlinedTextField(
                 value = email,
-                onValueChange = { email = it },
-                placeholder = {
-                    Text("Gmail", color = HintColor)
-                },
+                onValueChange = { email = it; loginError = "" },
+                placeholder = { Text("Gmail", color = HintColor) },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -99,28 +84,20 @@ fun LoginScreen(
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.fillMaxWidth()
             )
-
             Spacer(modifier = Modifier.height(16.dp))
-
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = it },
-                placeholder = {
-                    Text("Password", color = HintColor)
-                },
+                onValueChange = { password = it; loginError = "" },
+                placeholder = { Text("Password", color = HintColor) },
                 singleLine = true,
-                visualTransformation = if (passwordVisible)
-                    VisualTransformation.None
-                else
-                    PasswordVisualTransformation(),
+                visualTransformation = if (passwordVisible) VisualTransformation.None
+                else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 trailingIcon = {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
-                            imageVector = if (passwordVisible)
-                                Icons.Default.Visibility
-                            else
-                                Icons.Default.VisibilityOff,
+                            imageVector = if (passwordVisible) Icons.Default.Visibility
+                            else Icons.Default.VisibilityOff,
                             contentDescription = "Toggle password",
                             tint = HintColor
                         )
@@ -138,25 +115,40 @@ fun LoginScreen(
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.fillMaxWidth()
             )
-
+            if (loginError.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = loginError,
+                    color = Color(0xFFFFCDD2),
+                    fontSize = 13.sp,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
             Spacer(modifier = Modifier.height(8.dp))
-
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
                 Text(
                     text = "Forgot Password?",
                     color = White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 13.sp,
-                    modifier = Modifier.clickable { onForgotPasswordClick() }
+                    modifier = Modifier.clickable { /* mockup */ }
                 )
             }
-
             Spacer(modifier = Modifier.height(28.dp))
-
             Button(
-                onClick = { onLoginClick(email, password) },
+                onClick = {
+                    val success = UserSession.login(email.trim(), password.trim())
+                    if (success) {
+                        backStack.add(Routes.HomeRoute)
+                    } else {
+                        loginError = "Email atau password salah"
+                    }
+                },
+                // CONDITIONAL NAVIGATION: tombol aktif hanya jika keduanya tidak kosong
+                enabled = email.isNotBlank() && password.isNotBlank(),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF1A1A1A)
+                    containerColor = Color(0xFF1A1A1A),
+                    disabledContainerColor = Color(0xFF1A1A1A).copy(alpha = 0.4f)
                 ),
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
@@ -170,34 +162,18 @@ fun LoginScreen(
                     fontWeight = FontWeight.Bold
                 )
             }
-
             Spacer(modifier = Modifier.height(40.dp))
-
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                HorizontalDivider(
-                    modifier = Modifier.weight(1f),
-                    color = White.copy(alpha = 0.4f),
-                    thickness = 1.dp
-                )
-                Text(
-                    text = "  Or Login With  ",
-                    color = White,
-                    fontSize = 13.sp
-                )
-                HorizontalDivider(
-                    modifier = Modifier.weight(1f),
-                    color = White.copy(alpha = 0.4f),
-                    thickness = 1.dp
-                )
+                HorizontalDivider(modifier = Modifier.weight(1f), color = White.copy(alpha = 0.4f), thickness = 1.dp)
+                Text("  Or Login With  ", color = White, fontSize = 13.sp)
+                HorizontalDivider(modifier = Modifier.weight(1f), color = White.copy(alpha = 0.4f), thickness = 1.dp)
             }
-
             Spacer(modifier = Modifier.height(28.dp))
-
             Surface(
-                onClick = onGoogleLoginClick,
+                onClick = { /* masih mockup */ },
                 shape = RoundedCornerShape(50.dp),
                 color = White,
                 shadowElevation = 2.dp,
@@ -209,7 +185,7 @@ fun LoginScreen(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.Google),
+                        painter = painterResource(id = R.drawable.gugel_icon),
                         contentDescription = "Google Icon",
                         tint = Color.Unspecified,
                         modifier = Modifier.size(24.dp)
@@ -217,12 +193,7 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
                         text = buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    color = Color(0xFF3C3C3C),
-                                    fontWeight = FontWeight.Medium
-                                )
-                            ) {
+                            withStyle(SpanStyle(color = Color(0xFF3C3C3C), fontWeight = FontWeight.Medium)) {
                                 append("Continue with ")
                             }
                             withStyle(SpanStyle(color = Color(0xFF4285F4), fontWeight = FontWeight.SemiBold)) {
@@ -233,34 +204,28 @@ fun LoginScreen(
                     )
                 }
             }
-
+            Spacer(modifier = Modifier.height(12.dp))
             Spacer(modifier = Modifier.weight(1f))
             Spacer(modifier = Modifier.height(32.dp))
-
             Row {
-                Text(
-                    text = "Belum memiliki akun? ",
-                    color = White,
-                    fontSize = 14.sp
-                )
+                Text("Belum memiliki akun? ", color = White, fontSize = 14.sp)
                 Text(
                     text = "Register",
                     color = White,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     textDecoration = TextDecoration.Underline,
-                    modifier = Modifier.clickable { onRegisterClick() }
+                    modifier = Modifier.clickable { /* mockup register */ }
                 )
             }
-
             Spacer(modifier = Modifier.height(27.dp))
         }
     }
 }
 
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen()
-}
+private val DarkGreen   = Color(0xFF121713)
+private val MediumGreen = Color(0xFF5C7561)
+private val LightGreen  = Color(0xFF92BA9A)
+private val InputBg     = Color(0x33FFFFFF)
+private val White       = Color.White
+private val HintColor   = Color(0xAAFFFFFF)
