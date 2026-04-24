@@ -7,6 +7,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import com.example.prototypevolunteerapp.ui.screens.LoginScreen
 import com.example.prototypevolunteerapp.ui.screens.activities.ActivitiesScreen
 import com.example.prototypevolunteerapp.ui.screens.activities.ActivityDetailScreen
 import com.example.prototypevolunteerapp.ui.screens.dashboard.HomeScreen
@@ -32,6 +33,7 @@ fun ComposeApp() {
                 ),
                 entryProvider = entryProvider {
                     entry<Routes.WelcomeRoute> {WelcomeScreen()}
+                    entry<Routes.LoginRoute> {LoginScreen()}
                     entry<Routes.HomeRoute> {HomeScreen()}
                     entry<Routes.ActivitiesRoute> {
                         ActivitiesScreen()

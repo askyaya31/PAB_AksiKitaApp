@@ -29,6 +29,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.prototypevolunteerapp.R
+import com.example.prototypevolunteerapp.core.LocalBackStack
+import com.example.prototypevolunteerapp.core.Routes
 
 private val DarkGreen = Color(0xFF121713)
 private val MediumGreen = Color(0xFF5C7561)
@@ -39,11 +41,11 @@ private val HintColor = Color(0xAAFFFFFF)
 
 @Composable
 fun LoginScreen(
-    onLoginClick: (email: String, password: String) -> Unit = { _, _ -> },
     onForgotPasswordClick: () -> Unit = {},
     onRegisterClick: () -> Unit = {},
     onGoogleLoginClick: () -> Unit = {}
 ) {
+    val backStack = LocalBackStack.current
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -154,7 +156,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(28.dp))
 
             Button(
-                onClick = { onLoginClick(email, password) },
+                onClick = {backStack.add(Routes.HomeRoute)},
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF1A1A1A)
                 ),
@@ -209,7 +211,7 @@ fun LoginScreen(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.Google),
+                        painter = painterResource(id = R.drawable.gugel_icon),
                         contentDescription = "Google Icon",
                         tint = Color.Unspecified,
                         modifier = Modifier.size(24.dp)

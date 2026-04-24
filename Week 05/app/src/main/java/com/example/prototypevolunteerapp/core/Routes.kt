@@ -11,6 +11,11 @@ object Routes {
     @Serializable
     data object HomeRoute : NavKey
 
+    @Serializable
+    data object LoginRoute : NavKey {
+    }
+
+
     //Halaman tanpa parameter
     @Serializable
     data object ActivitiesRoute : NavKey

@@ -123,7 +123,7 @@ fun WelcomeScreen() {
                         if (namaInput.isBlank()) {
                             showError = true
                         } else {
-                            backStack.add(Routes.HomeRoute)
+                            backStack.add(Routes.LoginRoute)
                         }
                     },
                     modifier = Modifier
